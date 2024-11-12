@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "about/index"
   resources :brands
   resources :categories
   resources :products
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: "welcome#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
