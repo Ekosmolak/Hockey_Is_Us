@@ -15,7 +15,7 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "New order"
 
     fill_in "Customer", with: @order.customer_id
-    fill_in "Order items", with: @order.order_items_id
+    fill_in "Order item", with: @order.order_item_id
     fill_in "Total price", with: @order.total_price
     click_on "Create Order"
 
@@ -28,7 +28,7 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "Edit this order", match: :first
 
     fill_in "Customer", with: @order.customer_id
-    fill_in "Order items", with: @order.order_items_id
+    fill_in "Order item", with: @order.order_item_id
     fill_in "Total price", with: @order.total_price
     click_on "Update Order"
 
