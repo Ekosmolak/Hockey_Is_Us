@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :products
   resources :inventories
   resources :orders
-  resources :order_items
   resources :customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
