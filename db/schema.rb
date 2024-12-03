@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_03_232002) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_232200) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -45,7 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_03_232002) do
 
   create_table "categories", force: :cascade do |t|
     t.string "equipment_type"
-    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
