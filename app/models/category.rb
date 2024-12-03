@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  validates :equipment_type, :description, presence: true
+  validates :equipment_type, presence: true
   has_many :products
 
   def self.ransackable_associations(auth_object = nil)
