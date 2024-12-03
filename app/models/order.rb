@@ -4,6 +4,10 @@ class Order < ApplicationRecord
   has_many :customers
   belongs_to :order_item
 
+  def self.ransackable_associations(auth_object = nil)
+    [ "customers", "order_item" ]
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     [ "created_at", "customer_id", "id", "order_item_id", "total_price", "updated_at" ]
   end
