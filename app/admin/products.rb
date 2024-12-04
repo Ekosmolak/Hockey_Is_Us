@@ -6,6 +6,7 @@ ActiveAdmin.register Product do
   #
   permit_params :brand_id, :model, :category_id, :description, :price, :image
 
+  filter :image, as: :boolean
   #
   # or
   #
@@ -18,7 +19,7 @@ ActiveAdmin.register Product do
     f.semantic_errors
     f.inputs
     f.inputs do
-      f.input :image, as: :file
+      f.input :image, as: :url
     end
     f.actions
   end

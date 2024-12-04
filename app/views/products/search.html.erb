@@ -1,7 +1,15 @@
 <h1>Search Results</h1>
 
-<ul>
-  <% @products.each do |product| %>
-    <li><%= product.model %> - <%= product.price %></li>
-  <% end %>
-</ul>
+<% if @products.present? %>
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <strong>Model:</strong> <%= product.model %><br>
+        <strong>Price:</strong> $<%= product.price %><br>
+        <strong>Description:</strong> <%= product.description %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products found matching your search criteria.</p>
+<% end %>

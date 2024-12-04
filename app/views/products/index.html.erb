@@ -1,9 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Products" %>
-
+<div>
 <h1>Products</h1>
-
+  <%= form_with(url: products_path, method: :get, local: true) do |form| %>
+  <%= form.label :equipment_type, "Choose Equipment Type" %>
+  <%= form.select :equipment_type, Category.pluck(:equipment_type, :id), prompt: "Select an Equipment Type" %>
+  <%= form.submit "Filter" %>
+<% end %>
+</div>
 <div id="products">
   <% @products.each do |product| %>
     <%= render product %>

@@ -30,8 +30,9 @@
 </div>
 
   <div>
-    <%= form_with url: search_products_path, method: :get do |form| %>
-    <%= form.text_field :keywords, class: "input", placeholder: "Search for products" %>
+    <%= form_with(url: search_products_path, method: :get) do %>
+    <%= label_tag :keywords, "Search for Products or Brands" %>
+    <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
     <%= submit_tag "Search" %>
     <% end %>
       <%= yield %>
