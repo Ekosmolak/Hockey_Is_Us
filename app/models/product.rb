@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-validates :brand_id, :model, :category_id, :description, :price, presence: true
+validates :brand_id, :model, :category_id, :price, presence: true
 validates :price, numericality: true
   has_many :inventories
   belongs_to :brand
