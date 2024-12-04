@@ -27,7 +27,14 @@
       <li><%= link_to "About Us", about_path %></li>
     </ul>
   </nav>
-  <%= yield %>
 </div>
+
+  <div>
+    <%= form_with url: search_products_path, method: :get do |form| %>
+    <%= form.text_field :keywords, class: "input", placeholder: "Search for products" %>
+    <%= submit_tag "Search" %>
+    <% end %>
+      <%= yield %>
+  </div>
 </body>
 </html>

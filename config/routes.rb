@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :order_items
   resources :brands
   resources :categories
-  resources :products
+  resources :products do
+    collection do
+      get :search
+    end
+  end
   resources :inventories
   resources :orders
   resources :customers
