@@ -20,7 +20,7 @@ end
 
 skates_file = Rails.root.join('db/skates.csv')
 skates_data = File.read(skates_file)
-skates = CSV.parase(skates_data, headers: true, encoding: 'iso-8859-1')
+skates = CSV.parse(skates_data, headers: true, encoding: 'iso-8859-1')
 
 skates.each do |skate|
   Product.create(
@@ -34,7 +34,7 @@ end
 
 sticks_file = Rails.root.join('db/sticks.csv')
 sticks_data = File.read(sticks_file)
-sticks = CSV.parase(sticks_data, headers: true, encoding: 'iso-8859-1')
+sticks = CSV.parse(sticks_data, headers: true, encoding: 'iso-8859-1')
 
 sticks.each do |stick|
   Product.create(
@@ -48,7 +48,7 @@ end
 
 helmets_file = Rails.root.join('db/helmets.csv')
 helmets_data = File.read(helmets_file)
-helmets = CSV.parase(helmets_data, headers: true, encoding: 'iso-8859-1')
+helmets = CSV.parse(helmets_data, headers: true, encoding: 'iso-8859-1')
 
 helmets.each do |helmet|
   Product.create(
@@ -62,7 +62,7 @@ end
 
 gloves_file = Rails.root.join('db/gloves.csv')
 gloves_data = File.read(gloves_file)
-gloves = CSV.parase(gloves_data, headers: true, encoding: 'iso-8859-1')
+gloves = CSV.parse(gloves_data, headers: true, encoding: 'iso-8859-1')
 
 gloves.each do |glove|
   Product.create(
@@ -76,7 +76,7 @@ end
 
 accessories_file = Rails.root.join('db/accessories.csv')
 accessories_data = File.read(accessories_file)
-accessories = CSV.parase(accessories_data, headers: true, encoding: 'iso-8859-1')
+accessories = CSV.parse(accessories_data, headers: true, encoding: 'iso-8859-1')
 
 accessories.each do |accessory|
   Product.create(
