@@ -17,6 +17,17 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+  <div>
+    <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
+  <nav>
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Products", products_path %></li>
+      <li><%= link_to "Brands", brands_path %></li>
+      <li><%= link_to "About Us", about_path %></li>
+    </ul>
+  </nav>
+  <%= yield %>
+</div>
+</body>
 </html>

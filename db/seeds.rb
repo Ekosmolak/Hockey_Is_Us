@@ -1,57 +1,87 @@
 require 'csv'
 require 'open-uri'
 
-Product.delete_all
-Brand.delete_all
-Category.delete_all
+[ Product, Brand, Category ].each(&:delete_all)
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+brands = {
+  1 => "Bauer",
+  2 => "True",
+  3 => "CCM",
+  4 => "Warrior",
+  5 => "Sherwood"
+}
+
+categories = {
+  1 => "Skates",
+  2 => "Sticks",
+  3 => "Helmets",
+  4 => "Gloves",
+  5 => "Accessories"
+}
+
+brands.each { |id, name| Brand.find_or_create_by(id: id, name: name) }
+categories.each { |id, type| Category.find_or_create_by(id: id, equipment_type: type) }
 
 def create_products_from_csv(file_path)
   CSV.foreach(file_path, headers: true, encoding: 'iso-8859-1', quote_char: '"', col_sep: ',,') do |row|
-    cleaned_row = row.to_hash.reject { |key, value| value.blank? }
+    product_params = row.to_hash.symbolize_keys.slice(:brand_id, :model, :category_id, :price, :image, :description)
+    product = Product.find_or_initialize_by(
+      brand_id: product_params[:brand_id],
+      model: product_params[:model],
+      category_id: product_params[:category_id],
+      description: product_params[:description]
+    )
+    product.price = product_params[:price].to_d
 
-    brand = Brand.find_by(id: cleaned_row['brand_id'].to_i)
-    category = Category.find_by(id: cleaned_row['category_id'].to_i)
+    if product_params[:image].present? && !product.image.attached?
+      attach_image(product, product_params[:image])
+    end
 
-    if brand && category
-      product = Product.new(
-        brand_id: brand.id,
-        category_id: category.id,
-        model: cleaned_row['model'],
-        # description: cleaned_row['description'], bring back description on product.html.erb
-        price: cleaned_row['price'].to_d
-      )
-
-      if cleaned_row['image'].present?
-        begin
-          image_file = URI.open(cleaned_row['image'])
-          product.image.attach(io: image_file, filename: File.basename(image_file.path))
-        rescue OpenURI::HTTPError => e
-          puts "Failed to attach image for #{product.model}: #{e.message}"
-        end
-      end
-
-      if product.save
-        puts "Product created: #{product.model}"
-      else
-        puts "Failed to create product: #{product.model}. Errors: #{product.errors.full_messages.join(', ')}"
-      end
+    if product.save
+      puts "Product created: #{product.model}"
     else
-      puts "Invalid brand or category for product: #{cleaned_row['model']}. Brand ID: #{cleaned_row['brand_id']}, Category ID: #{cleaned_row['category_id']}"
+      puts "Failed to create product: #{product.model}. Errors: #{product.errors.full_messages.join(', ')}"
     end
   end
 end
 
+def attach_image(product, image_url)
+  begin
+    image_file = URI.open(image_url)
+    product.image.attach(io: image_file, filename: File.basename(image_file.path))
+    puts "Image attached for #{product.model}"
+  rescue OpenURI::HTTPError => e
+    puts "Failed to attach image for #{product.model}: #{e.message}"
+  end
+end
 
-brands = [ "Bauer", "True", "CCM", "Warrior", "Sherwood" ]
-brands.each { |brand| Brand.find_or_create_by(name: brand) }
+AdminUser.find_or_create_by!(email: 'admin@example.com') do |admin|
+  admin.password = 'password'
+  admin.password_confirmation = 'password'
+end
 
-categories = [ "Skates", "Sticks", "Helmets", "Gloves", "Accessories" ]
-categories.each { |category| Category.find_or_create_by(equipment_type: category) }
 
-create_products_from_csv(Rails.root.join('db/skates.csv'))
-create_products_from_csv(Rails.root.join('db/sticks.csv'))
-create_products_from_csv(Rails.root.join('db/helmets.csv'))
-create_products_from_csv(Rails.root.join('db/gloves.csv'))
-create_products_from_csv(Rails.root.join('db/accessories.csv'))
+%w[skates sticks helmets gloves accessories].each do |file|
+  create_products_from_csv(Rails.root.join("db/#{file}.csv"))
+end
+
+
+Product.find_each do |product|
+  rand(10..25).times do
+    size = case product.category_id
+    when 1
+             rand(6..13)
+    when 3, 4
+             [ 'S', 'M', 'L', 'XL' ].sample
+             [ 'Left', 'Right' ].sample
+    else
+             'One Size'
+    end
+
+    Inventory.create!(
+      product_id: product.id,
+      stock_level: rand(5..25),
+      size: size
+    )
+  end
+end
