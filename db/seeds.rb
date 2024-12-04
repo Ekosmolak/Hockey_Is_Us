@@ -8,13 +8,13 @@ categories = [ "Skates", "Sticks", "Helmets", "Gloves", "Accessories" ]
 
 brands.each do |brand|
   Brand.create(
-    name: brands
+    name: brand
   )
 end
 
 categories.each do |category|
   Category.create(
-    equipment_type: categories
+    equipment_type: category
   )
 end
 
@@ -83,7 +83,10 @@ accessories.each do |accessory|
     brand_id: accessory['brand_id'],
     model: accessory['model'],
     category_id: accessory['category_id'],
-    description: accessory['description'],
     price: accessory['price']
   )
+end
+
+rand(5..20).times do
+  Inventory
 end
