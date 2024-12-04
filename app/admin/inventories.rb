@@ -4,7 +4,7 @@ ActiveAdmin.register Inventory do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :product_id, :stock_level
+  permit_params :product_id, :stock_level, :size
   #
   # or
   #

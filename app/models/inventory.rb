@@ -8,6 +8,6 @@ validates :product_id, :stock_level, presence: true
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "product_id", "stock_level", "updated_at" ]
+    [ "created_at", "id", "product_id", "stock_level", "size", "updated_at" ]
   end
 end
