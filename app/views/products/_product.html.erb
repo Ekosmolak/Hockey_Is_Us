@@ -1,7 +1,13 @@
 <div id="<%= dom_id product %>">
+  <% if product.image&.attached? %>
+    <p>
+      <%= image_tag product.image if product.image.attached? %>
+    </p>
+  <% end %>
+
   <p>
     <strong>Brand:</strong>
-    <%= product.brand_id %>
+    <%= product.brand.name %>
   </p>
 
   <p>
@@ -11,12 +17,11 @@
 
   <p>
     <strong>Category:</strong>
-    <%= product.category_id %>
+    <%= product.category.equipment_type %>
   </p>
 
   <p>
     <strong>Price:</strong>
-    <%= product.price %>
+    <%= number_to_currency(product.price) %>
   </p>
-
 </div>
