@@ -2,6 +2,7 @@ class Brand < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
   has_many :products
+  has_one_attached :image
 
   def self.ransackable_associations(auth_object = nil)
     [ "products" ]
@@ -9,5 +10,9 @@ class Brand < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     [ "products", "created_at", "id", "name", "updated_at" ]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    super + [ "image" ]
   end
 end
