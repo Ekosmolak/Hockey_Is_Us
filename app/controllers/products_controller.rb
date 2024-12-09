@@ -1,6 +1,6 @@
 class ProductsController < InheritedResources::Base
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).per(10)
   end
 
   def search
@@ -14,6 +14,8 @@ class ProductsController < InheritedResources::Base
       category_id = Category.find_by(equipment_type: params[:equipment_type])&.id
       @products = @products.where(category_id: category_id) if category_id
     end
+
+    @products = @products.page(params[:page]).per(10)
 
     render :index
   end

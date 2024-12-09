@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Hockey Is Us" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
-
-  <body>
+<head>
+  <title><%= content_for(:title) || "Hockey Is Us" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= yield :head %>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <script src="https://js.stripe.com/v3"></script>
+</head>
+<body>
   <div>
     <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
-  <nav>
-    <ul>
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "Products", products_path %></li>
-      <li><%= link_to "Brands", brands_path %></li>
-      <li><%= link_to "About Us", about_path %></li>
-    </ul>
-  </nav>
-</div>
-
+    <nav>
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Products", products_path %></li>
+        <li><%= link_to "Brands", brands_path %></li>
+        <li><%= link_to "About Us", about_path %></li>
+        <li>
+          <%= link_to cart_path do %>
+            Cart
+            <% if cart.present? %>
+              <sup><%= cart.size %></sup>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
   <div>
     <%= form_with(url: search_products_path, method: :get) do %>
-    <%= label_tag :keywords, "Search for Products or Brands" %>
-    <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
-    <%= submit_tag "Search" %>
+      <%= label_tag :keywords, "Search for Products or Brands" %>
+      <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
+      <%= submit_tag "Search" %>
     <% end %>
-      <%= yield %>
+    <%= yield %>
   </div>
 </body>
 </html>
