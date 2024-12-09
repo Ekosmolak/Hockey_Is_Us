@@ -42,6 +42,7 @@ gem "stripe"
 gem "dotenv-rails", groups: [ :development, :test ]
 gem "kaminari"
 gem "stringio", ">= 3.1.2"
+gem "bcrypt", "~> 3.1.7"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
