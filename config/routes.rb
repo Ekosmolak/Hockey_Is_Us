@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "checkout/create"
+  get "checkout/success"
+  get "checkout/cancel"
   resources :order_items
   resources :brands
   resources :categories
