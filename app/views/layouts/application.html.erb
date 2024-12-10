@@ -28,10 +28,10 @@
           <li><%= link_to "About Us", about_path %></li>
 
           <% if customer_signed_in? %>
-            <li><%= link_to 'Log Out', destroy_customer_session_path, method: :delete %></li>
+            <li><%= link_to 'Log Out', method: :delete %></li>
           <% else %>
-            <li><%= link_to 'Login', new_customer_session_path %></li>
-            <li><%= link_to 'Sign Up', new_customer_registration_path %></li>
+            <li><%= link_to 'Login' %></li>
+            <li><%= link_to 'Sign Up' %></li>
           <% end %>
         </ul>
       </nav>
