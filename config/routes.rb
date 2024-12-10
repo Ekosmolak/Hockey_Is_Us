@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get "login", to: "sessions#new"
-  post "sign_in", to: "sessions#create"
-  get "/logout", to: "sessions#destroy", as: "logout"
+  get "Login", to: "sessions#new", as: :login
+  post "Login", to: "sessions#create"
 
-  get "sign_up", to: "customers#new", as: :sign_up
+  get "Logout", to: "sessions#destroy", as: :logout
 
-  resources :cart, only: %i[show create destroy]
+  get "Sign Up", to: "customers#new", as: :sign_up
+
+  resources :cart, only: %i[create destroy]
   resources :order_items
   resources :brands
   resources :categories

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Hockey Is Us" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,31 +13,48 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", media:"all", "data-turbo-track": "reload" %>
+    <script src="https://js.stripe.com/v3"></script>
   </head>
+<body>
+  <header>
+    <div>
+      <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
 
-  <body>
-  <div>
-    <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
-  <nav>
-    <ul>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "Shop", products_path %></li>
-    <li><%= link_to "Brands", brands_path %></li>
-    <li><%= link_to "About Us", about_path %></li>
+      <nav>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Shop", products_path %></li>
+          <li><%= link_to "Brands", brands_path %></li>
+          <li><%= link_to "About Us", about_path %></li>
 
-    <% if customer_signed_in? %>
-      <li>Welcome, <%= current_customer.name %></li>
-      <li><%= link_to "Logout", logout_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to "Login", login_path %></li>
-      <li><%= link_to "Sign Up", sign_up_path %></li>
-    <% end %>
-</ul>
-  </nav>
-</div>
-
-  <div>
+          <% if current_customer %>
+            <li>Welcome, <%= current_customer.name %></li>
+            <li><%= link_to "Logout", logout_path, method: :get %></li>
+          <% else %>
+            <li><%= link_to "Login", login_path %></li>
+            <li><%= link_to "Sign Up", sign_up_path %></li>
+          <% end %>
+          <li>
+            Cart
+            <% if cart.present? %>
+            <sup>
+              <%= cart.size %>
+            </sup>
+            <ul>
+              <% cart.each do |product| %>
+              <li>
+                <%# product.name %><%# link_to '−', cart_path(product), method: :delete %>
+                <%# button_to cart_path(product), method: :delete do %>
+                <%= product.model %><%= button_to '➖', cart_path(product), method: :delete  %>
+              </li>
+              <% end %>
+            </ul>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+        <div>
     <%= form_with(url: search_products_path, method: :get) do %>
     <%= label_tag :keywords, "Search for Products or Brands" %>
     <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
@@ -45,5 +62,7 @@
     <% end %>
       <%= yield %>
   </div>
-</body>
+    </div>
+  </header>
+  </body>
 </html>

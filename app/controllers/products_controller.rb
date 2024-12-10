@@ -20,6 +20,10 @@ class ProductsController < InheritedResources::Base
     render :index
   end
 
+  def show
+    @product = Product.find(params[:id])
+  end
+
   private
 
   def product_params

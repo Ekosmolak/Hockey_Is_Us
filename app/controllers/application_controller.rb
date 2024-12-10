@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    session[:cart] ||= []
-    Product.where(id: session[:cart])
+    Product.find(session[:shopping_cart])
   end
 
   def logged_in?

@@ -5,6 +5,8 @@
     </p>
   <% end %>
 
+  <h3><%= link_to product.model, product %></h3>
+
   <p>
     <strong>Brand:</strong>
     <%= product.brand.name %>
@@ -30,12 +32,12 @@
     <%= number_to_currency(product.price) %>
   </p>
 
-  <% if cart.include?(product) %>
+<% if cart.include?(product) %>
       <%= button_to cart_path(product), method: :delete do %>
       Remove from cart ⊖
       <% end %>
     <% else %>
-      <%= form_with url: cart_index_path, method: :post do %>
+      <%= form_with url: cart_index_url, method: :post do %>
         <%= hidden_field_tag(:id, product.id)%>
         <%= button_tag 'Add to Cart ➕' %>
       <% end %>
