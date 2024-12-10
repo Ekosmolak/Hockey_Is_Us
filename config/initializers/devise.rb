@@ -9,12 +9,12 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-   # The secret key used by Devise. Devise uses this key to generate
-   # random tokens. Changing this key will render invalid all existing
-   # confirmation, reset password and unlock tokens in the database.
-   # Devise will use the `secret_key_base` as its `secret_key`
-   # by default. You can change it below and use your own secret key.
-   config.secret_key = "cd63ed3fe8d0f7fb461f751ca1803db50bc8ce5057b2690fc165b6cce48ac46b22d87a8ab37c09c97b2e6bfd11875994009753fbf4f4627328b665990dbc2651"
+  # The secret key used by Devise. Devise uses this key to generate
+  # random tokens. Changing this key will render invalid all existing
+  # confirmation, reset password and unlock tokens in the database.
+  # Devise will use the `secret_key_base` as its `secret_key`
+  # by default. You can change it below and use your own secret key.
+  # config.secret_key = "cd63ed3fe8d0f7fb461f751ca1803db50bc8ce5057b2690fc165b6cce48ac46b22d87a8ab37c09c97b2e6bfd11875994009753fbf4f4627328b665990dbc2651"
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -268,6 +268,7 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+  config.skip_session_storage = [ :http_auth, :token_auth ]
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
