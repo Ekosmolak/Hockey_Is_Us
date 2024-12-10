@@ -1,10 +1,9 @@
 class Customer < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   validates :name, :address, :postal_code, :province, :email, :phone_number, presence: true
-  validates :phone_number, numericality: true
   validates :email, uniqueness: true
-  validates :password, length: { minimum: 8 }, if: :password_required?
+  validates :phone_number, format: { with: /\A[+\d\s()-]*\z/, message: "only allows numbers, spaces, and dashes" }
 
   has_many :orders
 

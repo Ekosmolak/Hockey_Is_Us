@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :customers, controllers: {
-    sessions: "customers/sessions",
-    registrations: "customers/registrations",
-    passwords: "customers/passwords",
-    unlocks: "customers/unlocks",
-    confirmations: "customers/confirmations",
-    omniauth_callbacks: "customers/omniauth_callbacks"
-  }
+  root to: "welcome#index"
+
+
+  devise_for :customers
 
   resources :cart, only: %i[show create destroy]
   resources :order_items
@@ -18,17 +14,18 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :inventories
   resources :orders
-  resources :customers
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  root to: "welcome#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "about", to: "about#index", as: :about
+
+
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
