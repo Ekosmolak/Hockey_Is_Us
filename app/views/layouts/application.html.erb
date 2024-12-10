@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Hockey Is Us" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,33 +17,26 @@
   </head>
 
   <body>
-  <div>
-    <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
-  <nav>
-    <ul>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "Shop", products_path %></li>
-    <li><%= link_to "Brands", brands_path %></li>
-    <li><%= link_to "About Us", about_path %></li>
+    <div>
+      <%= image_tag "hockey is us logo.png", alt: "Hockey Is Us Logo", style: "width: 300px; height: 300px;" %>
 
-    <% if customer_signed_in? %>
-      <li>Welcome, <%= current_customer.name %></li>
-      <li><%= link_to "Logout", logout_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to "Login", login_path %></li>
-      <li><%= link_to "Sign Up", sign_up_path %></li>
-    <% end %>
-</ul>
-  </nav>
-</div>
+      <nav>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Shop", products_path %></li>
+          <li><%= link_to "Brands", brands_path %></li>
+          <li><%= link_to "About Us", about_path %></li>
 
-  <div>
-    <%= form_with(url: search_products_path, method: :get) do %>
-    <%= label_tag :keywords, "Search for Products or Brands" %>
-    <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
-    <%= submit_tag "Search" %>
-    <% end %>
+          <% if current_customer.present? %>
+            <li><%= link_to "Log Out", destroy_customer_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Login', new_customer_session_path %></li>
+            <li><%= link_to 'Sign Up', new_customer_registration_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+
       <%= yield %>
-  </div>
-</body>
+    </div>
+  </body>
 </html>

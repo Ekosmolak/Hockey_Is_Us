@@ -1,15 +1,18 @@
 class Customer < ApplicationRecord
-  validates :name, :address, :postal_code, :email, :phone_number, presence: true
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
+
+  validates :name, :address, :postal_code, :province, :email, :phone_number, presence: true
   validates :phone_number, numericality: true
   validates :email, uniqueness: true
+  validates :password, length: { minimum: 8 }, if: :password_required?
+
   has_many :orders
-  has_secure_password
 
   def self.ransackable_associations(auth_object = nil)
     [ "orders" ]
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "address", "created_at", "email", "id", "name", "phone_number", "postal_code", "updated_at" ]
+    [ "address", "created_at", "email", "id", "name", "phone_number", "postal_code", "province", "updated_at", "reset_password_token" ]
   end
 end

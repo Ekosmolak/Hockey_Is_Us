@@ -1,0 +1,56 @@
+<h2>Edit Customer Account</h2>
+
+<%= form_with model: resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, value: resource.name %>
+  </div>
+
+  <div>
+    <%= f.label :address %><br />
+    <%= f.text_field :address, value: resource.address %>
+  </div>
+
+  <div>
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code, value: resource.postal_code %>
+  </div>
+
+  <div>
+    <%= f.label :province %><br />
+    <%= f.text_field :province, value: resource.province %>
+  </div>
+
+  <div>
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, value: resource.phone_number %>
+  </div>
+
+  <div>
+    <%= f.label :email %><br />
+    <%= f.email_field :email, value: resource.email %>
+  </div>
+
+  <div>
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div>
+    <%= f.label :current_password %> <i>(we need your current password to confirm changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div>
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<h3>

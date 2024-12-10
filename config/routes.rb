@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  get "login", to: "sessions#new"
-  post "login", to: "sessions#create"
-  get "/logout", to: "sessions#destroy", as: "logout"
-
-  get "sign_up", to: "customers#new", as: :sign_up
+  devise_for :customers, controllers: {
+    sessions: "customers/sessions",
+    registrations: "customers/registrations",
+    passwords: "customers/passwords",
+    unlocks: "customers/unlocks",
+    confirmations: "customers/confirmations",
+    omniauth_callbacks: "customers/omniauth_callbacks"
+  }
 
   resources :cart, only: %i[show create destroy]
   resources :order_items

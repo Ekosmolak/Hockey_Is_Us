@@ -1,8 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Products" %>
-<div>
+
 <h1>Products</h1>
+
+<div>
+  <%= form_with(url: search_products_path, method: :get) do %>
+  <%= label_tag :keywords, "Search for Products or Brands" %>
+  <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
+<div>
   <%= form_with(url: search_products_path, method: :get) do %>
   <%= label_tag :equipment_type, "Choose Equipment Type" %>
   <%= select_tag :equipment_type, options_for_select(Category.pluck(:equipment_type), selected: params[:equipment_type]), prompt: "Select an Equipment Type" %>

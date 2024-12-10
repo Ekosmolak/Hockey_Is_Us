@@ -29,6 +29,13 @@
   </div>
 
   <div>
+    <%= form.label :province %>
+    <%= form.select :province,
+          ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
+           "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"], { prompt: "Select Province or Territory" } %>
+  </div>
+
+  <div>
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>
