@@ -4,7 +4,7 @@ ActiveAdmin.register Customer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :address, :postal_code, :phone_number, :email, :password, :password_confirmation
+  permit_params :name, :address, :postal_code, :province, :phone_number, :email, :password, :password_confirmation
   #
   # or
   #
@@ -14,11 +14,14 @@ ActiveAdmin.register Customer do
   #   permitted
   # end
 
+
+
   form do |f|
     f.inputs "Customer Details" do
       f.input :name
       f.input :address
       f.input :postal_code
+      f.input :province
       f.input :email
       f.input :phone_number
       f.input :password
