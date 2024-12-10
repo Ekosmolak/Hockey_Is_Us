@@ -21,8 +21,8 @@ ActiveAdmin.register Customer do
       f.input :postal_code
       f.input :email
       f.input :phone_number
-      f.input :password # Virtual attribute for setting the password
-      f.input :password_confirmation # Optional, for confirmation
+      f.input :password
+      f.input :password_confirmation
     end
     f.actions
   end
