@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   belongs_to :brand
   belongs_to :category
   has_one_attached :image
+  has_many :order_items
 
   def self.ransackable_associations(auth_object = nil)
     [ "brand", "category", "inventories", "order_items" ]

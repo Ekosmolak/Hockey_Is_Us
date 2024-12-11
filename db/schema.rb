@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_11_191548) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_11_201835) do
+  create_table "abouts", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -112,6 +118,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_191548) do
     t.decimal "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_id"
   end
 
   create_table "orders", force: :cascade do |t|

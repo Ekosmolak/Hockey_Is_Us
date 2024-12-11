@@ -1,10 +1,14 @@
 class OrderItem < ApplicationRecord
-  validates :quantity, :price_at_purchase, :subtotal, presence: true
-  validates :quantity, :price_at_purchase, :subtotal, numericality: true
+  validates :quantity, :product_id, :price_at_purchase, :subtotal, presence: true
+  validates :quantity, :product_id, :price_at_purchase, :subtotal, numericality: true
   has_many :orders
+  belongs_to :product
 
+  def self.ransackable_associations(auth_object = nil)
+    [ "orders" ]
+  end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "price_at_purchase", "quantity", "subtotal", "updated_at" ]
+    [ "created_at", "id", "product_id" "price_at_purchase", "quantity", "subtotal", "updated_at" ]
   end
 end
