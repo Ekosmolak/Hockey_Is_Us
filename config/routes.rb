@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get "Sign Up", to: "customers#new", as: :sign_up
 
-  resource :cart, only: %i[show create destroy]
+  resources :cart, only: [ :show, :create, :destroy ]
   resources :order_items
   resources :brands
   resources :categories

@@ -35,7 +35,7 @@
       Remove from cart ⊖
       <% end %>
     <% else %>
-      <%= form_with url: cart_path, method: :create do %>
+      <%= form_with url: cart_index_path, method: :create do |form| %>
         <%= hidden_field_tag(:id, product.id)%>
         <%= button_tag 'Add to Cart ➕' %>
       <% end %>

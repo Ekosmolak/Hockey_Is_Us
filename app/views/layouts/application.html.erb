@@ -35,8 +35,8 @@
             <li><%= link_to "Login", login_path %></li>
             <li><%= link_to "Sign Up", sign_up_path %></li>
           <% end %>
-          <li><%= link_to "Cart", cart_path %></li>
           <li>
+            Cart
             <% if cart.present? %>
             <sup>
               <%= cart.size %>

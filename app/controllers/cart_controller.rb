@@ -2,8 +2,11 @@ class CartController < ApplicationController
   before_action :initialize_session
   helper_method :cart
 
+
   def show
-    @cart_items = cart
+    session[:shopping_cart] << id
+    @cart_items = @cart.all
+    redirect_to cart_path
   end
 
   def create
