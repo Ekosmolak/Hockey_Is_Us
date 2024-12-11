@@ -1,13 +1,9 @@
-<div id="<%= dom_id brand %>">
+<div id="<%= dom_id brand %>" class="card mb-4 shadow-sm">
   <% if brand.image&.attached? %>
-    <p>
-      <%= image_tag brand.image, width: "350px", height: "200px" %>
-    </p>
+    <%= image_tag brand.image, class: "card-img-top", alt: "#{brand.name} image", style: "max-width: 100%; height: auto;" %>
   <% end %>
 
-  <p>
-    <strong>Name:</strong>
-    <%= brand.name %>
-  </p>
-
+  <div class="card-body">
+    <h5 class="card-title text-center"><%= brand.name %></h5>
+  </div>
 </div>
