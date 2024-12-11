@@ -35,8 +35,8 @@
             <li><%= link_to "Login", login_path %></li>
             <li><%= link_to "Sign Up", sign_up_path %></li>
           <% end %>
+          <li><%= link_to "Cart", cart_path %></li>
           <li>
-            Cart
             <% if cart.present? %>
             <sup>
               <%= cart.size %>
@@ -54,13 +54,7 @@
           </li>
         </ul>
       </nav>
-        <div>
-          <%= form_with(url: search_products_path, method: :get) do %>
-          <%= label_tag :keywords, "Search for Products or Brands" %>
-          <%= text_field_tag :keywords, params[:keywords], placeholder: "Enter Brand or Product" %>
-          <%= submit_tag "Search" %>
-          <% end %>
-        </div>
+
         <%= yield %>
       </div>
     </header>

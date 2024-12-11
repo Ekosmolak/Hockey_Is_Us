@@ -1,0 +1,7 @@
+<h1>Your Shopping Cart</h1>
+<ul>
+  <% @cart_items.each do |item| %>
+    <li><%= item.model %> - $<%= item.price %></li>
+  <% end %>
+</ul>
+<%= link_to "Continue Shopping", products_path %>

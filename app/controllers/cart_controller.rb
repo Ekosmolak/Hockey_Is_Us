@@ -1,4 +1,11 @@
 class CartController < ApplicationController
+  before_action :initialize_session
+  helper_method :cart
+
+  def show
+    @cart_items = cart
+  end
+
   def create
     logger.debug("Adding #{params[:id]} to cart.")
     id = params[:id].to_i
