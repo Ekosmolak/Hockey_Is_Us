@@ -9,8 +9,10 @@
       <strong>Brand:</strong> <%= product.brand.name %><br>
       <strong>Model:</strong> <%= product.model %><br>
       <strong>Category:</strong> <%= product.category.equipment_type %><br>
-      <strong>Description:</strong> <%= product.description %><br>
-      <strong>Price:</strong> <%= number_to_currency(product.price) %>
+      <strong>Price:</strong> <%= number_to_currency(product.price) %><br>
+            <% if controller.action_name == "show" %>
+        <strong>Description:</strong> <%= product.description %>
+      <% end %>
     </p>
 
     <% if cart.include?(product) %>

@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     session[:shopping_cart] ||= []
   end
 
+  def index
+    @brands = Brand.includes(image_attachment: :blob).page(params[:brands_page])
+    @products = Product.includes(image_attachment: :blob).page(params[:products_page])
+  end
+
   def cart
     session[:shopping_cart] ||= []
     Product.where(id: session[:shopping_cart])

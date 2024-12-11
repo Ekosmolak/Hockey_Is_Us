@@ -40,6 +40,7 @@ gem "nokogiri"
 gem "image_processing", ">= 1.2"
 gem "stripe"
 gem "dotenv-rails", groups: [ :development, :test ]
+gem "kaminari"
 gem "kaminari-bootstrap"
 gem "stringio", ">= 3.1.2"
 gem "bcrypt", "~> 3.1.7"

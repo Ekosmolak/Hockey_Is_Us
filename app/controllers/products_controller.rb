@@ -1,7 +1,7 @@
 class ProductsController < InheritedResources::Base
   def index
     @products = Product.all
-    @products = Product.page(params[:page]).per(10)
+    @products = Product.includes(image_attachment: :blob).page(params[:page]).per(10)
   end
 
   def search
