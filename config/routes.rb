@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get "Logout", to: "sessions#destroy", as: :logout
 
   get "Sign Up", to: "customers#new", as: :sign_up
+  get "View Profile", to: "customers#show", as: :profile_show
 
+  resources :contacts, only: [ :create, :new ]
   resources :cart, only: [ :show, :create, :destroy ]
   resources :order_items
   resources :brands
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  root to: "welcome#index"
+  root to: "products#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "about", to: "about#index", as: :about

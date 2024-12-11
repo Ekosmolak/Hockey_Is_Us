@@ -6,12 +6,16 @@ class CustomersController < InheritedResources::Base
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      session[:customer_id] = @customer.id  # Log the user in after sign-up
+      session[:customer_id] = @customer.id
       redirect_to root_path, notice: "Welcome, #{@customer.name}!"
     else
-      puts @customer.errors.full_messages # This will print errors to the console
+      puts @customer.errors.full_messages
       render :new
     end
+  end
+
+  def show
+    @customer = Customer.find(session[:customer_id])
   end
 
   private

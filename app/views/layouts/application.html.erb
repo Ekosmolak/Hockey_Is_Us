@@ -28,13 +28,13 @@
 
           <nav>
             <ul class="nav">
-              <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
               <li class="nav-item"><%= link_to "Shop", products_path, class: "nav-link" %></li>
               <li class="nav-item"><%= link_to "Brands", brands_path, class: "nav-link" %></li>
               <li class="nav-item"><%= link_to "About Us", about_path, class: "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Contact Us", new_contact_path, class: "nav-link" %></li>
 
               <% if current_customer %>
-                <li class="nav-item">Welcome, <%= current_customer.name %></li>
+                <li class="nav-item"> <%= link_to "View Profile", profile_show_path, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to "Logout", logout_path, method: :get, class: "nav-link" %></li>
               <% else %>
                 <li class="nav-item"><%= link_to "Login", login_path, class: "nav-link" %></li>

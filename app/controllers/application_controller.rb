@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :initialize_session
   helper_method :cart, :current_customer, :customer_signed_in?
 
-  # Shopping Cart Initialization
   def initialize_session
     session[:shopping_cart] ||= []
   end
