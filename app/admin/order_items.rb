@@ -13,4 +13,15 @@ ActiveAdmin.register OrderItem do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  form do |f|
+    f.semantic_errors
+
+    f.inputs "Order Item Details" do
+      f.input :product, as: :select, collection: Product.pluck(:model, :id), include_blank: false, label: "Product"
+      f.input :quantity
+      f.input :price_at_purchase
+      f.input :subtotal
+    end
+    f.actions
+  end
 end

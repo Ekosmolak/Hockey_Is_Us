@@ -9,6 +9,6 @@ class OrderItem < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "product_id" "price_at_purchase", "quantity", "subtotal", "updated_at" ]
+    [ "created_at", "id", "product_id", "price_at_purchase", "quantity", "subtotal", "updated_at" ]
   end
 end

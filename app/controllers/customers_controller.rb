@@ -16,6 +16,7 @@ class CustomersController < InheritedResources::Base
 
   def show
     @customer = Customer.find(session[:customer_id])
+    @orders = @customer.orders
   end
 
   private

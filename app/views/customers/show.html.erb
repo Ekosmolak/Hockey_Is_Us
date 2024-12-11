@@ -2,9 +2,31 @@
 
 <%= render @customer %>
 
+<h2>Orders</h2>
+<% if @orders.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Total Price</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.id, order_path(order) %></td>
+          <td><%= number_to_currency(order.total_price) %></td>
+          <td><%= order.created_at.strftime('%B %d, %Y') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No orders found for this customer.</p>
+<% end %>
+
 <div>
   <%= link_to "Edit this customer", edit_customer_path(@customer) %> |
-  <%= link_to "Back to customers", customers_path %>
-
-  <%= button_to "Destroy this customer", @customer, method: :delete %>
+  <%= link_to "Back to products", root_path %>
 </div>
